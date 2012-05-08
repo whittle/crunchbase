@@ -16,26 +16,29 @@ bug-reports:         https://github.com/whittle/crunchbase/issues
 description:
   This is a driver for the CrunchBase API.
 
+extra-source-files:
+  README.md
+  LICENSE.txt
+
 library
   exposed-modules:
     Network.API.CrunchBase
 
   other-modules:
-    Network.API.CrunchBase.Request
-    Network.API.CrunchBase.Response
+    Data.API.CrunchBase.CompanyQuery
+    Data.API.CrunchBase.PersonQuery
+    Data.API.CrunchBase.Query
 
   build-depends:
     base ==4.5.*,
     bytestring ==0.9.*,
     HTTP ==4000.*,
+    http-conduit ==1.4.1.*,
     network ==2.3.*,
     ghc-prim,
     time ==1.4,
-    aeson ==0.6.*
-
-extra-source-files:
-  README.md
-  LICENSE.txt
+    aeson ==0.6.*,
+    containers ==0.4.2.*
 
 source-repository head
   type: git
