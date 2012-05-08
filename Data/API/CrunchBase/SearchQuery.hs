@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+-- | Searches currently only take a snippet of Text to search for.
 module Data.API.CrunchBase.SearchQuery
        ( SearchQuery(..)
        ) where

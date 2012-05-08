@@ -1,4 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
+-- | Querying for a service provider takes a ServiceProviderPermalink,
+--   which can be obtained from a search.
 module Data.API.CrunchBase.ServiceProviderQuery
        ( ServiceProviderQuery(..)
        , ServiceProviderPermalink(..)
@@ -18,10 +20,6 @@ newtype ServiceProviderPermalink =
 instance Query ServiceProviderQuery where
   toPathSegments (ServiceProviderQuery
                   (ServiceProviderPermalink permalink)) =
-    [ "v"
-    , "1"
-    , "service-provider"
-    , permalink `T.append` ".js"
-    ]
+    ["v", "1", "service-provider", permalink `T.append` ".js"]
 
   toQueryItems _ = []

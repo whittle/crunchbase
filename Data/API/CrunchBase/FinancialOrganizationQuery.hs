@@ -1,4 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
+-- | Querying for a financial organization takes a
+--   FinancialOrganizationPermalink, which can be obtained from a
+--   search.
 module Data.API.CrunchBase.FinancialOrganizationQuery
        ( FinancialOrganizationQuery(..)
        , FinancialOrganizationPermalink(..)
@@ -18,10 +21,6 @@ newtype FinancialOrganizationQuery =
 instance Query FinancialOrganizationQuery where
   toPathSegments (FinancialOrganizationQuery
                   (FinancialOrganizationPermalink permalink)) =
-    [ "v"
-    , "1"
-    , "financial-organization"
-    , permalink `T.append` ".js"
-    ]
+    ["v", "1", "financial-organization", permalink `T.append` ".js"]
 
   toQueryItems _ = []

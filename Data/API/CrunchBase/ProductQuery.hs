@@ -1,4 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
+-- | Querying for a product takes a ProductPermalink, which can be
+--   obtained from a search.
 module Data.API.CrunchBase.ProductQuery
        ( ProductQuery(..)
        , ProductPermalink(..)
@@ -13,10 +15,6 @@ newtype ProductQuery = ProductQuery ProductPermalink deriving (Eq, Show)
 
 instance Query ProductQuery where
   toPathSegments (ProductQuery (ProductPermalink permalink)) =
-    [ "v"
-    , "1"
-    , "product"
-    , permalink `T.append` ".js"
-    ]
+    ["v", "1", "product", permalink `T.append` ".js"]
 
   toQueryItems _ = []

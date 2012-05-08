@@ -1,4 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
+-- | Querying for a person takes a PersonPermalink, which can be
+--   obtained from a search.
 module Data.API.CrunchBase.PersonQuery
        ( PersonQuery(..)
        , PersonPermalink(..)
@@ -13,10 +15,6 @@ newtype PersonQuery = PersonQuery PersonPermalink deriving (Eq, Show)
 
 instance Query PersonQuery where
   toPathSegments (PersonQuery (PersonPermalink permalink)) =
-    [ "v"
-    , "1"
-    , "person"
-    , permalink `T.append` ".js"
-    ]
+    ["v", "1", "person", permalink `T.append` ".js"]
 
   toQueryItems _ = []
