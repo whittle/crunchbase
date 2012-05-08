@@ -7,6 +7,7 @@ module Network.API.CrunchBase
        , SearchQuery(..)
        , CompanyQuery(..)
        , PersonQuery(..)
+       , Person(..)
        , FinancialOrganizationQuery(..)
        , ProductQuery(..)
        , ServiceProviderQuery(..)
@@ -16,12 +17,18 @@ import Data.API.CrunchBase.Query
 import Data.API.CrunchBase.SearchQuery
 import Data.API.CrunchBase.CompanyQuery
 import Data.API.CrunchBase.PersonQuery
+import Data.API.CrunchBase.PersonResponse
 import Data.API.CrunchBase.FinancialOrganizationQuery
 import Data.API.CrunchBase.ProductQuery
 import Data.API.CrunchBase.ServiceProviderQuery
 
 import Network.HTTP.Conduit
 import qualified Data.ByteString.Lazy as B
+import Data.Aeson (decode)
+
+-- | Get a Person using a PersonPermalink.
+getPerson :: PersonPermalink -> IO (Maybe Person)
+getPerson = fmap (decode . responseBody) . sendRequest . PersonQuery
 
 -- | This function takes a member of the Query typeclass and returns
 --   an IO action which will fetch a Response.

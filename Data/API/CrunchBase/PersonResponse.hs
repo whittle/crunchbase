@@ -4,30 +4,30 @@ module Data.API.CrunchBase.PersonResponse
          Person(..)
        ) where
 
-import qualified Data.ByteString.Lazy as B
 import Data.Aeson
---import Data.Time.Clock
 import GHC.Generics
+import qualified Data.Text as T
+--import Data.Time.Clock
 
-data Person = Person { first_name :: String
-                     , last_name :: String
-                     , permalink :: String
-                     , crunchbase_url :: String
-                     , homepage_url :: Maybe String
-                     , birthplace :: Maybe String
-                     , twitter_username :: Maybe String
-                     , blog_url :: Maybe String
-                     , blog_feed_url :: Maybe String
-                     , affiliation_name :: String
-                     , born_year :: Maybe String
-                     , born_month :: Maybe String
-                     , born_day :: Maybe String
-                     , tag_list :: Maybe String
-                     , alias_list :: Maybe String
-                     , created_at :: String --UTCTime
-                     , updated_at :: String --UTCTime
-                     , overview :: Maybe String
-                     , image :: Maybe String
+data Person = Person { first_name :: T.Text
+                     , last_name :: T.Text
+                     , permalink :: T.Text
+                     , crunchbase_url :: T.Text
+                     , homepage_url :: Maybe T.Text
+                     , birthplace :: Maybe T.Text
+                     , twitter_username :: Maybe T.Text
+                     , blog_url :: Maybe T.Text
+                     , blog_feed_url :: Maybe T.Text
+                     , affiliation_name :: T.Text
+                     , born_year :: Maybe T.Text
+                     , born_month :: Maybe T.Text
+                     , born_day :: Maybe T.Text
+                     , tag_list :: Maybe T.Text
+                     , alias_list :: Maybe T.Text
+                     , created_at :: T.Text --UTCTime
+                     , updated_at :: T.Text --UTCTime
+                     , overview :: Maybe T.Text
+                     , image :: Maybe T.Text
                      , degrees :: [Degree]
                      , relationships :: [Relationship]
                      , investments :: [Investment]
@@ -39,10 +39,10 @@ data Person = Person { first_name :: String
 
 instance FromJSON Person
 
-type Degree = String
+type Degree = T.Text
 type Relationship = Object
-type Investment = String
-type Milestone = String
-type VideoEmbed = String
-type ExternalLink = String
-type WebPresence = String
+type Investment = T.Text
+type Milestone = T.Text
+type VideoEmbed = T.Text
+type ExternalLink = T.Text
+type WebPresence = T.Text
