@@ -6,11 +6,17 @@ module Network.API.CrunchBase
        , mkRequest
        , CompanyQuery(..)
        , PersonQuery(..)
+       , FinancialOrganizationQuery(..)
+       , ProductQuery(..)
+       , ServiceProviderQuery(..)
        ) where
 
 import Data.API.CrunchBase.Query
 import Data.API.CrunchBase.CompanyQuery
 import Data.API.CrunchBase.PersonQuery
+import Data.API.CrunchBase.FinancialOrganizationQuery
+import Data.API.CrunchBase.ProductQuery
+import Data.API.CrunchBase.ServiceProviderQuery
 
 import Network.HTTP.Conduit
 import qualified Data.ByteString.Lazy as B
