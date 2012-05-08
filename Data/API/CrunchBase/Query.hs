@@ -19,4 +19,4 @@ class Query q where
   toPath = toByteString . H.encodePathSegments . toPathSegments
 
   toQueryStr :: q -> H.Ascii
-  toQueryStr = H.renderQuery True . toQueryItems
+  toQueryStr = H.renderQuery False . toQueryItems

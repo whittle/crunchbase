@@ -4,6 +4,7 @@
 module Network.API.CrunchBase
        ( sendRequest
        , mkRequest
+       , SearchQuery(..)
        , CompanyQuery(..)
        , PersonQuery(..)
        , FinancialOrganizationQuery(..)
@@ -12,6 +13,7 @@ module Network.API.CrunchBase
        ) where
 
 import Data.API.CrunchBase.Query
+import Data.API.CrunchBase.SearchQuery
 import Data.API.CrunchBase.CompanyQuery
 import Data.API.CrunchBase.PersonQuery
 import Data.API.CrunchBase.FinancialOrganizationQuery
