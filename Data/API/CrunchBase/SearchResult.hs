@@ -1,6 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-
-module Network.API.CrunchBase.Response.Search.Result where
+module Data.API.CrunchBase.SearchResult where
 
 import Data.Aeson (Value (..), Object, FromJSON (..))
 import Data.Aeson ((.:))

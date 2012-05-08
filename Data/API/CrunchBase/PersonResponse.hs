@@ -1,12 +1,12 @@
 {-# LANGUAGE DeriveGeneric #-}
-
-module Network.API.CrunchBase.Response where
-
-import Network.API.CrunchBase.Response.Search
+module Data.API.CrunchBase.PersonResponse
+       (
+         Person(..)
+       ) where
 
 import qualified Data.ByteString.Lazy as B
 import Data.Aeson
-import Data.Time.Clock
+--import Data.Time.Clock
 import GHC.Generics
 
 data Person = Person { first_name :: String
