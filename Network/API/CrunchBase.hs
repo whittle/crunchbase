@@ -17,6 +17,8 @@ module Network.API.CrunchBase
 
 import Data.API.CrunchBase.Query
 import Data.API.CrunchBase.SearchQuery
+import Data.API.CrunchBase.SearchPage
+import Data.API.CrunchBase.SearchResult
 import Data.API.CrunchBase.CompanyQuery
 import Data.API.CrunchBase.Company
 import Data.API.CrunchBase.PersonQuery
@@ -28,7 +30,12 @@ import Data.API.CrunchBase.ServiceProviderQuery
 
 import Network.HTTP.Conduit
 import qualified Data.ByteString.Lazy as B
+import Data.Text (Text)
 import Data.Aeson (decode)
+
+-- | Search using Text.
+getSearchPage :: Text -> IO (Maybe SearchPage)
+getSearchPage = fmap (decode . responseBody) . sendRequest . SearchQuery
 
 -- | Get a Company using a CompanyPermalink.
 getCompany :: CompanyPermalink -> IO (Maybe Company)

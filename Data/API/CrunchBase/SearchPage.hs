@@ -1,16 +1,24 @@
-{-# LANGUAGE DeriveGeneric #-}
-module Data.API.CrunchBase.SearchResponse where
+{-# LANGUAGE OverloadedStrings #-}
+module Data.API.CrunchBase.SearchPage
+       ( SearchPage(..)
+       ) where
 
+import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.SearchResult
 
-import qualified Data.Aeson as A
-import Data.Attoparsec.Number
-import GHC.Generics
+import Data.Aeson
+import Data.Text (Text)
+import Control.Applicative
 
-data Page = Page { total :: Number
-                 , page :: Number
-                 , crunchbase_url :: String
-                 , results :: [SearchResult]
-                 } deriving (Eq, Show, Generic)
+data SearchPage = SearchPage { total :: Integer
+                             , page :: Integer
+                             , crunchbaseUrl :: Text
+                             , results :: [SearchResult]
+                             } deriving (Eq, Show)
 
-instance A.FromJSON Page
+instance FromJSON SearchPage where
+  parseJSON (Object o) = SearchPage
+                         <$> o .: "total"
+                         <*> o .: "page"
+                         <*> o .: "crunchbase_url"
+                         <*> o .: "results"
