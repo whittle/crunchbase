@@ -5,11 +5,14 @@ module Network.API.CrunchBase
        ( sendRequest
        , mkRequest
        , SearchQuery
+       , SearchPage
+       , SearchResult
        , CompanyQuery
        , Company
        , PersonQuery
        , Person
        , FinancialOrganizationQuery
+       , FinancialOrganization
        , ProductQuery
        , Product
        , ServiceProviderQuery
@@ -24,6 +27,7 @@ import Data.API.CrunchBase.Company
 import Data.API.CrunchBase.PersonQuery
 import Data.API.CrunchBase.Person
 import Data.API.CrunchBase.FinancialOrganizationQuery
+import Data.API.CrunchBase.FinancialOrganization
 import Data.API.CrunchBase.ProductQuery
 import Data.API.CrunchBase.Product
 import Data.API.CrunchBase.ServiceProviderQuery
@@ -44,6 +48,12 @@ getCompany = fmap (decode . responseBody) . sendRequest . CompanyQuery
 -- | Get a Person using a PersonPermalink.
 getPerson :: PersonPermalink -> IO (Maybe Person)
 getPerson = fmap (decode . responseBody) . sendRequest . PersonQuery
+
+-- | Get a FinancialOrganization using a FinancialOrganiziationPermalink.
+getFinancialOrganization :: FinancialOrganizationPermalink
+                         -> IO (Maybe FinancialOrganization)
+getFinancialOrganization =
+  fmap (decode . responseBody) . sendRequest . FinancialOrganizationQuery
 
 -- | Get a Product using a ProductPermalink.
 getProduct :: ProductPermalink -> IO (Maybe Product)
