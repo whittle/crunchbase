@@ -4,6 +4,7 @@ module Data.API.CrunchBase.CompanyResponse
          Company(..)
        ) where
 
+import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.CompanyQuery (CompanyPermalink(..))
 
 import Data.Aeson
@@ -12,44 +13,44 @@ import Control.Applicative
 
 data Company = Company { name :: Text
                        , permalink :: CompanyPermalink
-                       , crunchbase_url :: Text
-                       , homepage_url :: Maybe Text
-                       , blog_url :: Maybe Text
-                       , blog_feed_url :: Maybe Text
-                       , twitter_username :: Maybe Text
-                       , category_code :: Maybe Text
-                       , number_of_employees :: Maybe Integer
-                       , founded_year :: Maybe Integer
-                       , founded_month :: Maybe Integer
-                       , founded_day :: Maybe Integer
-                       , deadpooled_year :: Maybe Integer
-                       , deadpooled_month :: Maybe Integer
-                       , deadpooled_day :: Maybe Integer
-                       , deadpooled_url :: Maybe Integer
-                       , tag_list :: Maybe Text
-                       , alias_list :: Maybe Text
-                       , email_address :: Maybe Text
-                       , phone_number :: Maybe Text
+                       , crunchbaseUrl :: Text
+                       , homepageUrl :: Maybe Text
+                       , blogUrl :: Maybe Text
+                       , blogFeedUrl :: Maybe Text
+                       , twitterUsername :: Maybe Text
+                       , categoryCode :: Maybe Text
+                       , numberOfEmployees :: Maybe Integer
+                       , foundedYear :: Maybe Integer
+                       , foundedMonth :: Maybe Integer
+                       , foundedDay :: Maybe Integer
+                       , deadpooledYear :: Maybe Integer
+                       , deadpooledMonth :: Maybe Integer
+                       , deadpooledDay :: Maybe Integer
+                       , deadpooledUrl :: Maybe Text
+                       , tagList :: Maybe Text
+                       , aliasList :: Maybe Text
+                       , emailAddress :: Maybe Text
+                       , phoneNumber :: Maybe Text
                        , description :: Maybe Text
-                       , created_at :: Maybe Text
-                       , updated_at :: Maybe Text
+                       , createdAt :: Maybe Text
+                       , updatedAt :: Maybe Text
                        , overview :: Maybe Text
                        , image :: Maybe Object
                        , products :: [Object]
                        , relationships :: [Object]
                        , competitions :: [Object]
                        , providerships :: [Object]
-                       , total_money_raised :: Maybe Text
-                       , funding_rounds :: [Object]
+                       , totalMoneyRaised :: Maybe Text
+                       , fundingRounds :: [Object]
                        , investments :: [Object]
                        , acquisition :: Maybe Object
                        , acquisitions :: [Object]
                        , offices :: [Object]
                        , milestones :: [Object]
                        , ipo :: Maybe Object
-                       , video_embeds :: [Object]
+                       , videoEmbeds :: [Object]
                        , screenshots :: [Object]
-                       , external_links :: [Object]
+                       , externalLinks :: [Object]
                        } deriving (Eq, Show)
 
 instance FromJSON Company where
@@ -57,11 +58,11 @@ instance FromJSON Company where
                        <$> o .: "name"
                        <*> o .: "permalink"
                        <*> o .: "crunchbase_url"
-                       <*> o .:? "homepage_url"
-                       <*> o .:? "blog_url"
-                       <*> o .:? "blog_feed_url"
-                       <*> o .:? "twitter_username"
-                       <*> o .:? "category_code"
+                       <*> o .:- "homepage_url"
+                       <*> o .:- "blog_url"
+                       <*> o .:- "blog_feed_url"
+                       <*> o .:- "twitter_username"
+                       <*> o .:- "category_code"
                        <*> o .:? "number_of_employees"
                        <*> o .:? "founded_year"
                        <*> o .:? "founded_month"
@@ -69,15 +70,15 @@ instance FromJSON Company where
                        <*> o .:? "deadpooled_year"
                        <*> o .:? "deadpooled_month"
                        <*> o .:? "deadpooled_day"
-                       <*> o .:? "deadpooled_url"
-                       <*> o .:? "tag_list"
-                       <*> o .:? "alias_list"
-                       <*> o .:? "email_address"
-                       <*> o .:? "phone_number"
-                       <*> o .:? "description"
-                       <*> o .:? "created_at"
-                       <*> o .:? "updated_at"
-                       <*> o .:? "overview"
+                       <*> o .:- "deadpooled_url"
+                       <*> o .:- "tag_list"
+                       <*> o .:- "alias_list"
+                       <*> o .:- "email_address"
+                       <*> o .:- "phone_number"
+                       <*> o .:- "description"
+                       <*> o .:- "created_at"
+                       <*> o .:- "updated_at"
+                       <*> o .:- "overview"
                        <*> o .:? "image"
                        <*> o .: "products"
                        <*> o .: "relationships"
