@@ -16,6 +16,7 @@ module Network.API.CrunchBase
        , ProductQuery
        , Product
        , ServiceProviderQuery
+       , ServiceProvider
        ) where
 
 import Data.API.CrunchBase.Query
@@ -31,6 +32,7 @@ import Data.API.CrunchBase.FinancialOrganization
 import Data.API.CrunchBase.ProductQuery
 import Data.API.CrunchBase.Product
 import Data.API.CrunchBase.ServiceProviderQuery
+import Data.API.CrunchBase.ServiceProvider
 
 import Network.HTTP.Conduit
 import qualified Data.ByteString.Lazy as B
@@ -58,6 +60,10 @@ getFinancialOrganization =
 -- | Get a Product using a ProductPermalink.
 getProduct :: ProductPermalink -> IO (Maybe Product)
 getProduct = fmap (decode . responseBody) . sendRequest . ProductQuery
+
+-- | Get a ServiceProvider using a ServiceProviderPermalink.
+getServiceProvider :: ServiceProviderPermalink -> IO (Maybe ServiceProvider)
+getServiceProvider = fmap (decode . responseBody) . sendRequest . ServiceProviderQuery
 
 -- | This function takes a member of the Query typeclass and returns
 --   an IO action which will fetch a Response.
