@@ -1,48 +1,72 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Data.API.CrunchBase.PersonResponse
        (
          Person(..)
        ) where
 
+import Data.API.CrunchBase.Response
+import Data.API.CrunchBase.PersonQuery (PersonPermalink(..))
+
 import Data.Aeson
-import GHC.Generics
-import qualified Data.Text as T
---import Data.Time.Clock
+import Data.Text (Text)
+import Control.Applicative
 
-data Person = Person { first_name :: T.Text
-                     , last_name :: T.Text
-                     , permalink :: T.Text
-                     , crunchbase_url :: T.Text
-                     , homepage_url :: Maybe T.Text
-                     , birthplace :: Maybe T.Text
-                     , twitter_username :: Maybe T.Text
-                     , blog_url :: Maybe T.Text
-                     , blog_feed_url :: Maybe T.Text
-                     , affiliation_name :: T.Text
-                     , born_year :: Maybe T.Text
-                     , born_month :: Maybe T.Text
-                     , born_day :: Maybe T.Text
-                     , tag_list :: Maybe T.Text
-                     , alias_list :: Maybe T.Text
-                     , created_at :: T.Text --UTCTime
-                     , updated_at :: T.Text --UTCTime
-                     , overview :: Maybe T.Text
-                     , image :: Maybe T.Text
-                     , degrees :: [Degree]
-                     , relationships :: [Relationship]
-                     , investments :: [Investment]
-                     , milestones :: [Milestone]
-                     , video_embeds :: [VideoEmbed]
-                     , external_links :: [ExternalLink]
-                     , web_presences :: [WebPresence]
-                     } deriving (Eq, Show, Generic)
+data Person = Person { firstName :: Text
+                     , lastName :: Text
+                     , permalink :: PersonPermalink
+                     , crunchbaseUrl :: Text
+                     , homepageUrl :: Maybe Text
+                     , birthplace :: Maybe Text
+                     , twitterUsername :: Maybe Text
+                     , blogUrl :: Maybe Text
+                     , blogFeedUrl :: Maybe Text
+                     , affiliationName :: Maybe Text
+                     , bornYear :: Maybe Integer
+                     , bornMonth :: Maybe Integer
+                     , bornDay :: Maybe Integer
+                     , tagList :: Maybe Text
+                     , aliasList :: Maybe Text
+                     , createdAt :: Maybe Text
+                     , updatedAt :: Maybe Text
+                     , overview :: Maybe Text
+                     , image :: Maybe Object
+                     , degrees :: [Object]
+                     , relationships :: [Object]
+                     , investments :: [Object]
+                     , milestones :: [Object]
+                     , videoEmbeds :: [Object]
+                     , externalLinks :: [Object]
+                     , webPresences :: [Object]
+                     } deriving (Eq, Show)
 
-instance FromJSON Person
+instance FromJSON Person where
+  parseJSON (Object o) = Person
+                         <$> o .: "first_name"
+                         <*> o .: "last_name"
+                         <*> o .: "permalink"
+                         <*> o .: "crunchbase_url"
+                         <*> o .:- "homepage_url"
+                         <*> o .:- "birthplace"
+                         <*> o .:- "twitter_username"
+                         <*> o .:- "blog_url"
+                         <*> o .:- "blog_feed_url"
+                         <*> o .:- "affiliation_name"
+                         <*> o .:? "born_year"
+                         <*> o .:? "born_month"
+                         <*> o .:? "born_day"
+                         <*> o .:- "tag_list"
+                         <*> o .:- "alias_list"
+                         <*> o .:- "created_at"
+                         <*> o .:- "updated_at"
+                         <*> o .:- "overview"
+                         <*> o .:? "image"
+                         <*> o .: "degrees"
+                         <*> o .: "relationships"
+                         <*> o .: "investments"
+                         <*> o .: "milestones"
+                         <*> o .: "video_embeds"
+                         <*> o .: "external_links"
+                         <*> o .: "web_presences"
 
-type Degree = T.Text
-type Relationship = Object
-type Investment = T.Text
-type Milestone = T.Text
-type VideoEmbed = T.Text
-type ExternalLink = T.Text
-type WebPresence = T.Text
+instance FromJSON PersonPermalink where
+  parseJSON (String s) = return . PersonPermalink $ s
