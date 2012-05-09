@@ -18,9 +18,9 @@ module Network.API.CrunchBase
 import Data.API.CrunchBase.Query
 import Data.API.CrunchBase.SearchQuery
 import Data.API.CrunchBase.CompanyQuery
-import Data.API.CrunchBase.CompanyResponse
+import Data.API.CrunchBase.Company
 import Data.API.CrunchBase.PersonQuery
-import Data.API.CrunchBase.PersonResponse
+import Data.API.CrunchBase.Person
 import Data.API.CrunchBase.FinancialOrganizationQuery
 import Data.API.CrunchBase.ProductQuery
 import Data.API.CrunchBase.Product

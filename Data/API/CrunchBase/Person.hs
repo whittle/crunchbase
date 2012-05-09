@@ -1,7 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Data.API.CrunchBase.PersonResponse
-       (
-         Person(..)
+module Data.API.CrunchBase.Person
+       ( Person(..)
        ) where
 
 import Data.API.CrunchBase.Response
