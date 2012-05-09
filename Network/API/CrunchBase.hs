@@ -4,18 +4,20 @@
 module Network.API.CrunchBase
        ( sendRequest
        , mkRequest
-       , SearchQuery(..)
-       , CompanyQuery(..)
-       , PersonQuery(..)
-       , Person(..)
-       , FinancialOrganizationQuery(..)
-       , ProductQuery(..)
-       , ServiceProviderQuery(..)
+       , SearchQuery
+       , CompanyQuery
+       , Company
+       , PersonQuery
+       , Person
+       , FinancialOrganizationQuery
+       , ProductQuery
+       , ServiceProviderQuery
        ) where
 
 import Data.API.CrunchBase.Query
 import Data.API.CrunchBase.SearchQuery
 import Data.API.CrunchBase.CompanyQuery
+import Data.API.CrunchBase.CompanyResponse
 import Data.API.CrunchBase.PersonQuery
 import Data.API.CrunchBase.PersonResponse
 import Data.API.CrunchBase.FinancialOrganizationQuery
@@ -25,6 +27,10 @@ import Data.API.CrunchBase.ServiceProviderQuery
 import Network.HTTP.Conduit
 import qualified Data.ByteString.Lazy as B
 import Data.Aeson (decode)
+
+-- | Get a Company using a CompanyPermalink.
+getCompany :: CompanyPermalink -> IO (Maybe Company)
+getCompany = fmap (decode . responseBody) . sendRequest . CompanyQuery
 
 -- | Get a Person using a PersonPermalink.
 getPerson :: PersonPermalink -> IO (Maybe Person)
