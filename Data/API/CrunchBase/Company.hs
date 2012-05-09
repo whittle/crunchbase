@@ -94,6 +94,3 @@ instance FromJSON Company where
                          <*> o .: "video_embeds"
                          <*> o .: "screenshots"
                          <*> o .: "external_links"
-
-instance FromJSON CompanyPermalink where
-  parseJSON (String s) = return . CompanyPermalink $ s

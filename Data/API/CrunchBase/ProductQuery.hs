@@ -8,8 +8,7 @@ module Data.API.CrunchBase.ProductQuery
 
 import Data.API.CrunchBase.Query
 import qualified Data.Text as T
-
-newtype ProductPermalink = ProductPermalink T.Text deriving (Eq, Show)
+import Data.Aeson (FromJSON(..), Value(..))
 
 newtype ProductQuery = ProductQuery ProductPermalink deriving (Eq, Show)
 
@@ -18,3 +17,8 @@ instance Query ProductQuery where
     ["v", "1", "product", permalink `T.append` ".js"]
 
   toQueryItems _ = []
+
+newtype ProductPermalink = ProductPermalink T.Text deriving (Eq, Show)
+
+instance FromJSON ProductPermalink where
+  parseJSON (String s) = return . ProductPermalink $ s

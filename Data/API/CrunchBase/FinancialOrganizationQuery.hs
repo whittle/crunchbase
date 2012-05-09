@@ -9,10 +9,7 @@ module Data.API.CrunchBase.FinancialOrganizationQuery
 
 import Data.API.CrunchBase.Query
 import qualified Data.Text as T
-
-newtype FinancialOrganizationPermalink =
-  FinancialOrganizationPermalink T.Text
-  deriving (Eq, Show)
+import Data.Aeson (FromJSON(..), Value(..))
 
 newtype FinancialOrganizationQuery =
   FinancialOrganizationQuery FinancialOrganizationPermalink
@@ -24,3 +21,10 @@ instance Query FinancialOrganizationQuery where
     ["v", "1", "financial-organization", permalink `T.append` ".js"]
 
   toQueryItems _ = []
+
+newtype FinancialOrganizationPermalink =
+  FinancialOrganizationPermalink T.Text
+  deriving (Eq, Show)
+
+instance FromJSON FinancialOrganizationPermalink where
+  parseJSON (String s) = return . FinancialOrganizationPermalink $ s

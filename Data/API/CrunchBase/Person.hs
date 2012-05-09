@@ -66,6 +66,3 @@ instance FromJSON Person where
                          <*> o .: "video_embeds"
                          <*> o .: "external_links"
                          <*> o .: "web_presences"
-
-instance FromJSON PersonPermalink where
-  parseJSON (String s) = return . PersonPermalink $ s

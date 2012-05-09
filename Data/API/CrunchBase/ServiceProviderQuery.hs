@@ -8,13 +8,10 @@ module Data.API.CrunchBase.ServiceProviderQuery
 
 import Data.API.CrunchBase.Query
 import qualified Data.Text as T
+import Data.Aeson (FromJSON(..), Value(..))
 
 newtype ServiceProviderQuery =
   ServiceProviderQuery ServiceProviderPermalink
-  deriving (Eq, Show)
-
-newtype ServiceProviderPermalink =
-  ServiceProviderPermalink T.Text
   deriving (Eq, Show)
 
 instance Query ServiceProviderQuery where
@@ -23,3 +20,10 @@ instance Query ServiceProviderQuery where
     ["v", "1", "service-provider", permalink `T.append` ".js"]
 
   toQueryItems _ = []
+
+newtype ServiceProviderPermalink =
+  ServiceProviderPermalink T.Text
+  deriving (Eq, Show)
+
+instance FromJSON ServiceProviderPermalink where
+  parseJSON (String s) = return . ServiceProviderPermalink $ s

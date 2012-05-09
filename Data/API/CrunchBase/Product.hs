@@ -66,6 +66,3 @@ instance FromJSON Product where
                          <*> o .: "milestones"
                          <*> o .: "video_embeds"
                          <*> o .: "external_links"
-
-instance FromJSON ProductPermalink where
-  parseJSON (String s) = return . ProductPermalink $ s

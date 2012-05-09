@@ -8,8 +8,7 @@ module Data.API.CrunchBase.CompanyQuery
 
 import Data.API.CrunchBase.Query
 import qualified Data.Text as T
-
-newtype CompanyPermalink = CompanyPermalink T.Text deriving (Eq, Show)
+import Data.Aeson (FromJSON(..), Value(..))
 
 newtype CompanyQuery = CompanyQuery CompanyPermalink deriving (Eq, Show)
 
@@ -18,3 +17,8 @@ instance Query CompanyQuery where
     ["v", "1", "company", permalink `T.append` ".js"]
 
   toQueryItems _ = []
+
+newtype CompanyPermalink = CompanyPermalink T.Text deriving (Eq, Show)
+
+instance FromJSON CompanyPermalink where
+  parseJSON (String s) = return . CompanyPermalink $ s

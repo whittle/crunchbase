@@ -8,8 +8,7 @@ module Data.API.CrunchBase.PersonQuery
 
 import Data.API.CrunchBase.Query
 import qualified Data.Text as T
-
-newtype PersonPermalink = PersonPermalink T.Text deriving (Eq, Show)
+import Data.Aeson (FromJSON(..), Value(..))
 
 newtype PersonQuery = PersonQuery PersonPermalink deriving (Eq, Show)
 
@@ -18,3 +17,8 @@ instance Query PersonQuery where
     ["v", "1", "person", permalink `T.append` ".js"]
 
   toQueryItems _ = []
+
+newtype PersonPermalink = PersonPermalink T.Text deriving (Eq, Show)
+
+instance FromJSON PersonPermalink where
+  parseJSON (String s) = return . PersonPermalink $ s
