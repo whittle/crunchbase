@@ -1,5 +1,5 @@
 name:                crunchbase
-version:             0.1.1.0
+version:             0.1.1.1
 synopsis:            Access the CrunchBase API.
 homepage:            https://github.com/whittle/crunchbase
 license:             MIT
