@@ -2,19 +2,23 @@
 -- | This module is used to run queries on the API. The queries
 --   themselves are constructed elsewhere.
 module Network.API.CrunchBase
-       ( sendRequest
-       , mkRequest
+       ( getSearchPage
        , SearchQuery
        , SearchPage
        , SearchResult
+       , getCompany
        , CompanyQuery
        , Company
+       , getPerson
        , PersonQuery
        , Person
+       , getFinancialOrganization
        , FinancialOrganizationQuery
        , FinancialOrganization
+       , getProduct
        , ProductQuery
        , Product
+       , getServiceProvider
        , ServiceProviderQuery
        , ServiceProvider
        ) where
