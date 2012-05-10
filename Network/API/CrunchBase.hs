@@ -72,7 +72,7 @@ sendRequest query = withManager $ httpLbs (mkRequest query)
 
 -- | This function creates an HTTP request from any type in the Query
 --   class.
-mkRequest :: (Query q) => q -> (Request m)
+mkRequest :: (Query q) => q -> Request m
 mkRequest query = def
   { method = "GET"
   , host = "api.crunchbase.com"

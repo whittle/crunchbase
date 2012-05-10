@@ -25,7 +25,7 @@ data ServiceProvider = ServiceProvider
                        , image :: Maybe Object
                        , offices :: [Object]
                        , providerships :: [Object]
-                       , external_links :: [Object]
+                       , externalLinks :: [Object]
                        } deriving (Eq, Show)
 
 instance FromJSON ServiceProvider where
