@@ -1,5 +1,5 @@
 name:                crunchbase
-version:             0.1.1.1
+version:             0.1.1.2
 synopsis:            Access the CrunchBase API.
 homepage:            https://github.com/whittle/crunchbase
 license:             MIT
@@ -23,10 +23,21 @@ extra-source-files:
 library
   exposed-modules:
     Network.API.CrunchBase
+    Data.API.CrunchBase.SearchQuery
+    Data.API.CrunchBase.SearchPage
+    Data.API.CrunchBase.SearchResult
+    Data.API.CrunchBase.CompanyQuery
+    Data.API.CrunchBase.Company
+    Data.API.CrunchBase.PersonQuery
+    Data.API.CrunchBase.Person
+    Data.API.CrunchBase.FinancialOrganizationQuery
+    Data.API.CrunchBase.FinancialOrganization
+    Data.API.CrunchBase.ProductQuery
+    Data.API.CrunchBase.Product
+    Data.API.CrunchBase.ServiceProviderQuery
+    Data.API.CrunchBase.ServiceProvider
 
   other-modules:
-    Data.API.CrunchBase.CompanyQuery
-    Data.API.CrunchBase.PersonQuery
     Data.API.CrunchBase.Query
 
   build-depends: base ==4.5.*
