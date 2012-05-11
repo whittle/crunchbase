@@ -10,7 +10,7 @@ import Data.API.CrunchBase.Query
 import qualified Data.Text as T
 import Data.Aeson (FromJSON(..), Value(..))
 
-newtype ProductQuery = ProductQuery ProductPermalink deriving (Eq, Show)
+newtype ProductQuery = ProductQuery ProductPermalink deriving (Eq, Show, Read)
 
 instance Query ProductQuery where
   toPathSegments (ProductQuery (ProductPermalink permalink)) =
@@ -18,7 +18,7 @@ instance Query ProductQuery where
 
   toQueryItems _ = []
 
-newtype ProductPermalink = ProductPermalink T.Text deriving (Eq, Show)
+newtype ProductPermalink = ProductPermalink T.Text deriving (Eq, Show, Read)
 
 instance FromJSON ProductPermalink where
   parseJSON (String s) = return . ProductPermalink $ s

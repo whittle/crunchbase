@@ -12,7 +12,7 @@ import Data.Aeson (FromJSON(..), Value(..))
 
 newtype ServiceProviderQuery =
   ServiceProviderQuery ServiceProviderPermalink
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 instance Query ServiceProviderQuery where
   toPathSegments (ServiceProviderQuery
@@ -23,7 +23,7 @@ instance Query ServiceProviderQuery where
 
 newtype ServiceProviderPermalink =
   ServiceProviderPermalink T.Text
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 instance FromJSON ServiceProviderPermalink where
   parseJSON (String s) = return . ServiceProviderPermalink $ s

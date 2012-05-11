@@ -13,7 +13,7 @@ import Data.Aeson (FromJSON(..), Value(..))
 
 newtype FinancialOrganizationQuery =
   FinancialOrganizationQuery FinancialOrganizationPermalink
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 instance Query FinancialOrganizationQuery where
   toPathSegments (FinancialOrganizationQuery
@@ -24,7 +24,7 @@ instance Query FinancialOrganizationQuery where
 
 newtype FinancialOrganizationPermalink =
   FinancialOrganizationPermalink T.Text
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 instance FromJSON FinancialOrganizationPermalink where
   parseJSON (String s) = return . FinancialOrganizationPermalink $ s

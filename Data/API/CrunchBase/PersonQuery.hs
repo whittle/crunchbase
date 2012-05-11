@@ -10,7 +10,7 @@ import Data.API.CrunchBase.Query
 import qualified Data.Text as T
 import Data.Aeson (FromJSON(..), Value(..))
 
-newtype PersonQuery = PersonQuery PersonPermalink deriving (Eq, Show)
+newtype PersonQuery = PersonQuery PersonPermalink deriving (Eq, Show, Read)
 
 instance Query PersonQuery where
   toPathSegments (PersonQuery (PersonPermalink permalink)) =
@@ -18,7 +18,7 @@ instance Query PersonQuery where
 
   toQueryItems _ = []
 
-newtype PersonPermalink = PersonPermalink T.Text deriving (Eq, Show)
+newtype PersonPermalink = PersonPermalink T.Text deriving (Eq, Show, Read)
 
 instance FromJSON PersonPermalink where
   parseJSON (String s) = return . PersonPermalink $ s
