@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Data.API.CrunchBase.SearchResult
        ( SearchResult(..)
+       , mkCompany
        ) where
 
 import Data.API.CrunchBase.Response
@@ -9,6 +10,7 @@ import Data.API.CrunchBase.PersonQuery (PersonPermalink(..))
 import Data.API.CrunchBase.FinancialOrganizationQuery (FinancialOrganizationPermalink(..))
 import Data.API.CrunchBase.ProductQuery (ProductPermalink(..))
 import Data.API.CrunchBase.ServiceProviderQuery (ServiceProviderPermalink(..))
+import Data.API.CrunchBase.Image (Image(..))
 
 import Data.Aeson (Value(..), Object, FromJSON(..), (.:))
 import Data.Aeson.Types (Parser)
@@ -18,34 +20,34 @@ import Data.Text (Text)
 data SearchResult = Company
                     { name :: Text
                     , companyPermalink :: CompanyPermalink
-                    , crunchbaseUrl :: Text
+                    , crunchbaseUrl :: Maybe Text
                     , overview :: Maybe Text
-                    , image :: Maybe Object }
+                    , image :: Maybe Image }
                   | Person
                     { firstName :: Text
                     , lastName :: Text
                     , personPermalink :: PersonPermalink
-                    , crunchbaseUrl :: Text
+                    , crunchbaseUrl :: Maybe Text
                     , overview :: Maybe Text
-                    , image :: Maybe Object }
+                    , image :: Maybe Image }
                   | FinancialOrganization
                     { name :: Text
                     , financialOrganizationPermalink :: FinancialOrganizationPermalink
-                    , crunchbaseUrl :: Text
+                    , crunchbaseUrl :: Maybe Text
                     , overview :: Maybe Text
-                    , image :: Maybe Object }
+                    , image :: Maybe Image }
                   | Product
                     { name :: Text
                     , productPermalink :: ProductPermalink
-                    , crunchbaseUrl :: Text
+                    , crunchbaseUrl :: Maybe Text
                     , overview :: Maybe Text
-                    , image :: Maybe Object }
+                    , image :: Maybe Image }
                   | ServiceProvider
                     { name :: Text
                     , serviceProviderPermalink :: ServiceProviderPermalink
-                    , crunchbaseUrl :: Text
+                    , crunchbaseUrl :: Maybe Text
                     , overview :: Maybe Text
-                    , image :: Maybe Object }
+                    , image :: Maybe Image }
                   deriving (Eq, Show)
 
 instance FromJSON SearchResult where
@@ -62,7 +64,7 @@ mkCompany :: Value -> Parser SearchResult
 mkCompany (Object o) = Company
                        <$> o .: "name"
                        <*> o .: "permalink"
-                       <*> o .: "crunchbase_url"
+                       <*> o .:- "crunchbase_url"
                        <*> o .:- "overview"
                        <*> o .: "image"
 
@@ -71,7 +73,7 @@ mkPerson (Object o) = Person
                       <$> o .: "first_name"
                       <*> o .: "last_name"
                       <*> o .: "permalink"
-                      <*> o .: "crunchbase_url"
+                      <*> o .:- "crunchbase_url"
                       <*> o .:- "overview"
                       <*> o .: "image"
 
@@ -79,7 +81,7 @@ mkFinancialOrganization :: Value -> Parser SearchResult
 mkFinancialOrganization (Object o) = FinancialOrganization
                                      <$> o .: "name"
                                      <*> o .: "permalink"
-                                     <*> o .: "crunchbase_url"
+                                     <*> o .:- "crunchbase_url"
                                      <*> o .:- "overview"
                                      <*> o .: "image"
 
@@ -87,7 +89,7 @@ mkProduct :: Value -> Parser SearchResult
 mkProduct (Object o) = Product
                        <$> o .: "name"
                        <*> o .: "permalink"
-                       <*> o .: "crunchbase_url"
+                       <*> o .:- "crunchbase_url"
                        <*> o .:- "overview"
                        <*> o .: "image"
 
@@ -95,6 +97,6 @@ mkServiceProvider :: Value -> Parser SearchResult
 mkServiceProvider (Object o) = ServiceProvider
                                <$> o .: "name"
                                <*> o .: "permalink"
-                               <*> o .: "crunchbase_url"
+                               <*> o .:- "crunchbase_url"
                                <*> o .:- "overview"
                                <*> o .: "image"

@@ -1,10 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Data.API.CrunchBase.Person
        ( Person(..)
+       , Degree(..)
+       , Relationship(..)
        ) where
 
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.PersonQuery (PersonPermalink(..))
+import qualified Data.API.CrunchBase.SearchResult as S
 import Data.API.CrunchBase.Image
 
 import Data.Aeson
@@ -31,7 +34,7 @@ data Person = Person { firstName :: Text
                      , overview :: Maybe Text
                      , image :: Maybe Image
                      , degrees :: [Degree]
-                     , relationships :: [Object]
+                     , relationships :: [Relationship]
                      , investments :: [Object]
                      , milestones :: [Object]
                      , videoEmbeds :: [Object]
@@ -84,3 +87,14 @@ instance FromJSON Degree where
                          <*> o .:? "graduated_year"
                          <*> o .:? "graduated_month"
                          <*> o .:? "graduated_day"
+
+data Relationship = Relationship { isPast :: Bool
+                                  , title :: Text
+                                  , firm :: S.SearchResult
+                                  } deriving (Eq, Show)
+
+instance FromJSON Relationship where
+  parseJSON (Object o) = Relationship
+                         <$> o .: "is_past"
+                         <*> o .: "title"
+                         <*> ((o .: "firm") >>= S.mkCompany)
