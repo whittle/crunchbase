@@ -36,6 +36,7 @@ library
     Data.API.CrunchBase.Product
     Data.API.CrunchBase.ServiceProviderQuery
     Data.API.CrunchBase.ServiceProvider
+    Data.API.CrunchBase.Image
 
   other-modules:
     Data.API.CrunchBase.Query
