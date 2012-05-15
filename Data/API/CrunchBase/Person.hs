@@ -30,7 +30,7 @@ data Person = Person { firstName :: Text
                      , updatedAt :: Maybe Text
                      , overview :: Maybe Text
                      , image :: Maybe Image
-                     , degrees :: [Object]
+                     , degrees :: [Degree]
                      , relationships :: [Object]
                      , investments :: [Object]
                      , milestones :: [Object]
@@ -67,3 +67,20 @@ instance FromJSON Person where
                          <*> o .: "video_embeds"
                          <*> o .: "external_links"
                          <*> o .: "web_presences"
+
+data Degree = Degree { degreeType :: Maybe Text
+                     , subject :: Maybe Text
+                     , institution :: Maybe Text
+                     , graduatedYear :: Maybe Integer
+                     , graduatedMonth :: Maybe Integer
+                     , graduatedDay :: Maybe Integer
+                     } deriving (Eq, Show)
+
+instance FromJSON Degree where
+  parseJSON (Object o) = Degree
+                         <$> o .:- "degree_type"
+                         <*> o .:- "subject"
+                         <*> o .:- "institution"
+                         <*> o .:? "graduated_year"
+                         <*> o .:? "graduated_month"
+                         <*> o .:? "graduated_day"
