@@ -3,6 +3,7 @@ module Data.API.CrunchBase.Person
        ( Person(..)
        , Degree(..)
        , Relationship(..)
+       , WebPresence(..)
        ) where
 
 import Data.API.CrunchBase.Response
@@ -39,7 +40,7 @@ data Person = Person { firstName :: Text
                      , milestones :: [Object]
                      , videoEmbeds :: [Object]
                      , externalLinks :: [Object]
-                     , webPresences :: [Object]
+                     , webPresences :: [WebPresence]
                      } deriving (Eq, Show)
 
 instance FromJSON Person where
@@ -98,3 +99,12 @@ instance FromJSON Relationship where
                          <$> o .: "is_past"
                          <*> o .: "title"
                          <*> ((o .: "firm") >>= S.mkCompany)
+
+data WebPresence = WebPresence { externalUrl :: Text
+                               , siteName :: Text
+                               } deriving (Eq, Show)
+
+instance FromJSON WebPresence where
+  parseJSON (Object o) = WebPresence
+                         <$> o .: "external_url"
+                         <*> o .: "title"
