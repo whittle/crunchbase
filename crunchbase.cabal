@@ -1,5 +1,5 @@
 name:                crunchbase
-version:             0.1.2.1
+version:             0.1.2.2
 synopsis:            Access the CrunchBase API.
 homepage:            https://github.com/whittle/crunchbase
 license:             MIT
@@ -37,6 +37,9 @@ library
     Data.API.CrunchBase.ServiceProviderQuery
     Data.API.CrunchBase.ServiceProvider
     Data.API.CrunchBase.Image
+    Data.API.CrunchBase.ExternalLink
+    Data.API.CrunchBase.FundingRound
+    Data.API.CrunchBase.VideoEmbed
 
   other-modules:
     Data.API.CrunchBase.Query
