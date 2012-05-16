@@ -2,6 +2,10 @@
 module Data.API.CrunchBase.SearchResult
        ( SearchResult(..)
        , mkCompany
+       , mkPerson
+       , mkFinancialOrganization
+       , mkProduct
+       , mkServiceProvider
        ) where
 
 import Data.API.CrunchBase.Response

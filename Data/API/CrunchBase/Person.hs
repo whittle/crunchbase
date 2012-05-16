@@ -16,6 +16,7 @@ import Data.API.CrunchBase.VideoEmbed
 import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
+import Data.Aeson.Types (Parser)
 import Data.Text (Text)
 import Control.Applicative
 
@@ -102,7 +103,14 @@ instance FromJSON Relationship where
   parseJSON (Object o) = Relationship
                          <$> o .:? "is_past"
                          <*> o .:- "title"
-                         <*> ((o .: "firm") >>= S.mkCompany)
+                         <*> ((o .: "firm") >>= mkFirm)
+
+mkFirm :: Value -> Parser S.SearchResult
+mkFirm v@(Object o) = o .: "type_of_entity" >>= flip mkFirm' v
+
+mkFirm' :: Text -> Value -> Parser S.SearchResult
+mkFirm' "company" = S.mkCompany
+mkFirm' "financial_org" = S.mkFinancialOrganization
 
 data Investment = Investment { fundingRound :: FundingRound
                              } deriving (Eq, Show)
