@@ -26,7 +26,7 @@ data AvailableSize = AvailableSize { width :: Number
                                    } deriving (Eq, Show)
 
 instance FromJSON AvailableSize where
-  parseJSON (Array a) = return $ AvailableSize
+  parseJSON (Array a) = return AvailableSize
                         { width = unpackNumber . unpackHead . V.head $ a
                         , height = unpackNumber . unpackLast . V.head $ a
                         , url = unpackString . V.last $ a
