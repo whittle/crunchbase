@@ -3,6 +3,7 @@ module Data.API.CrunchBase.Person
        ( Person(..)
        , Degree(..)
        , Relationship(..)
+       , Milestone(..)
        , WebPresence(..)
        ) where
 
@@ -37,7 +38,7 @@ data Person = Person { firstName :: Text
                      , degrees :: [Degree]
                      , relationships :: [Relationship]
                      , investments :: [Object]
-                     , milestones :: [Object]
+                     , milestones :: [Milestone]
                      , videoEmbeds :: [Object]
                      , externalLinks :: [Object]
                      , webPresences :: [WebPresence]
@@ -108,3 +109,28 @@ instance FromJSON WebPresence where
   parseJSON (Object o) = WebPresence
                          <$> o .: "external_url"
                          <*> o .: "title"
+
+data Milestone = Milestone { description :: Text
+                           , stonedYear :: Maybe Integer
+                           , stonedMonth :: Maybe Integer
+                           , stonedDay :: Maybe Integer
+                           , sourceUrl :: Maybe Text
+                           , sourceText :: Maybe Text
+                           , sourceDescription :: Maybe Text
+                           , stonedValue :: Maybe Value
+                           , stonedValueType :: Maybe Value
+                           , stonedAcquirer :: Maybe Value
+                           } deriving (Eq, Show)
+
+instance FromJSON Milestone where
+  parseJSON (Object o) = Milestone
+                         <$> o .: "description"
+                         <*> o .:? "stoned_year"
+                         <*> o .:? "stoned_month"
+                         <*> o .:? "stoned_day"
+                         <*> o .:- "source_url"
+                         <*> o .:- "source_text"
+                         <*> o .:- "source_description"
+                         <*> o .:? "stoned_value"
+                         <*> o .:? "stoned_value_type"
+                         <*> o .:? "stoned_acquirer"
