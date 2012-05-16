@@ -90,15 +90,15 @@ instance FromJSON Degree where
                          <*> o .:? "graduated_month"
                          <*> o .:? "graduated_day"
 
-data Relationship = Relationship { isPast :: Bool
-                                  , title :: Text
+data Relationship = Relationship { isPast :: Maybe Bool
+                                  , title :: Maybe Text
                                   , firm :: S.SearchResult
                                   } deriving (Eq, Show)
 
 instance FromJSON Relationship where
   parseJSON (Object o) = Relationship
-                         <$> o .: "is_past"
-                         <*> o .: "title"
+                         <$> o .:? "is_past"
+                         <*> o .:- "title"
                          <*> ((o .: "firm") >>= S.mkCompany)
 
 data WebPresence = WebPresence { externalUrl :: Text
