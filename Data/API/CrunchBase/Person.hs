@@ -11,6 +11,7 @@ import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.PersonQuery (PersonPermalink(..))
 import qualified Data.API.CrunchBase.SearchResult as S
 import Data.API.CrunchBase.Image
+import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
 import Data.Text (Text)
@@ -40,8 +41,8 @@ data Person = Person { firstName :: Text
                      , investments :: [Object]
                      , milestones :: [Milestone]
                      , videoEmbeds :: [Object]
-                     , externalLinks :: [Object]
-                     , webPresences :: [WebPresence]
+                     , externalLinks :: [ExternalLink]
+                     , webPresences :: [ExternalLink]
                      } deriving (Eq, Show)
 
 instance FromJSON Person where
@@ -100,15 +101,6 @@ instance FromJSON Relationship where
                          <$> o .:? "is_past"
                          <*> o .:- "title"
                          <*> ((o .: "firm") >>= S.mkCompany)
-
-data WebPresence = WebPresence { externalUrl :: Text
-                               , siteName :: Text
-                               } deriving (Eq, Show)
-
-instance FromJSON WebPresence where
-  parseJSON (Object o) = WebPresence
-                         <$> o .: "external_url"
-                         <*> o .: "title"
 
 data Milestone = Milestone { description :: Text
                            , stonedYear :: Maybe Integer
