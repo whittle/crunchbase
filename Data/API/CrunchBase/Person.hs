@@ -4,13 +4,14 @@ module Data.API.CrunchBase.Person
        , Degree(..)
        , Relationship(..)
        , Milestone(..)
-       , WebPresence(..)
+       , Investment(..)
        ) where
 
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.PersonQuery (PersonPermalink(..))
 import qualified Data.API.CrunchBase.SearchResult as S
 import Data.API.CrunchBase.Image
+import Data.API.CrunchBase.FundingRound
 import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
@@ -38,7 +39,7 @@ data Person = Person { firstName :: Text
                      , image :: Maybe Image
                      , degrees :: [Degree]
                      , relationships :: [Relationship]
-                     , investments :: [Object]
+                     , investments :: [Investment]
                      , milestones :: [Milestone]
                      , videoEmbeds :: [Object]
                      , externalLinks :: [ExternalLink]
@@ -92,15 +93,21 @@ instance FromJSON Degree where
                          <*> o .:? "graduated_day"
 
 data Relationship = Relationship { isPast :: Maybe Bool
-                                  , title :: Maybe Text
-                                  , firm :: S.SearchResult
-                                  } deriving (Eq, Show)
+                                 , title :: Maybe Text
+                                 , firm :: S.SearchResult
+                                 } deriving (Eq, Show)
 
 instance FromJSON Relationship where
   parseJSON (Object o) = Relationship
                          <$> o .:? "is_past"
                          <*> o .:- "title"
                          <*> ((o .: "firm") >>= S.mkCompany)
+
+data Investment = Investment { fundingRound :: FundingRound
+                             } deriving (Eq, Show)
+
+instance FromJSON Investment where
+  parseJSON (Object o) = Investment <$> o .: "funding_round"
 
 data Milestone = Milestone { description :: Text
                            , stonedYear :: Maybe Integer
