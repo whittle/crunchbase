@@ -12,6 +12,7 @@ import Data.API.CrunchBase.PersonQuery (PersonPermalink(..))
 import qualified Data.API.CrunchBase.SearchResult as S
 import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.FundingRound
+import Data.API.CrunchBase.VideoEmbed
 import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
@@ -41,7 +42,7 @@ data Person = Person { firstName :: Text
                      , relationships :: [Relationship]
                      , investments :: [Investment]
                      , milestones :: [Milestone]
-                     , videoEmbeds :: [Object]
+                     , videoEmbeds :: [VideoEmbed]
                      , externalLinks :: [ExternalLink]
                      , webPresences :: [ExternalLink]
                      } deriving (Eq, Show)
