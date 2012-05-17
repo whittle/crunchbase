@@ -5,6 +5,7 @@ module Data.API.CrunchBase.Product
 
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.ProductQuery (ProductPermalink (..))
+import Data.API.CrunchBase.Image
 
 import Data.Aeson
 import Data.Text (Text)
@@ -31,7 +32,7 @@ data Product = Product { name :: Text
                        , createdAt :: Maybe Text
                        , updatedAt :: Maybe Text
                        , overview :: Maybe Text
-                       , image :: Maybe Object
+                       , image :: Maybe Image
                        , company :: Maybe Object
                        , milestones :: [Object]
                        , videoEmbeds :: [Object]

@@ -5,6 +5,7 @@ module Data.API.CrunchBase.Company
 
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.CompanyQuery (CompanyPermalink(..))
+import Data.API.CrunchBase.Image
 
 import Data.Aeson
 import Data.Text (Text)
@@ -34,7 +35,7 @@ data Company = Company { name :: Text
                        , createdAt :: Maybe Text
                        , updatedAt :: Maybe Text
                        , overview :: Maybe Text
-                       , image :: Maybe Object
+                       , image :: Maybe Image
                        , products :: [Object]
                        , relationships :: [Object]
                        , competitions :: [Object]
