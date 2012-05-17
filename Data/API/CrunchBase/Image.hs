@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Data.API.CrunchBase.Image
        ( Image(..)
+       , AvailableSize(..)
        ) where
 
 import Data.API.CrunchBase.Response ((.:-))
