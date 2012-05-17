@@ -7,6 +7,7 @@ import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.ProductQuery (ProductPermalink (..))
 import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.VideoEmbed
+import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
 import Data.Text (Text)
@@ -37,7 +38,7 @@ data Product = Product { name :: Text
                        , company :: Maybe Object
                        , milestones :: [Object]
                        , videoEmbeds :: [VideoEmbed]
-                       , externalLinks :: [Object]
+                       , externalLinks :: [ExternalLink]
                        } deriving (Eq, Show)
 
 instance FromJSON Product where

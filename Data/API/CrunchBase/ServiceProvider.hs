@@ -6,6 +6,7 @@ module Data.API.CrunchBase.ServiceProvider
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.ServiceProviderQuery (ServiceProviderPermalink(..))
 import Data.API.CrunchBase.Image
+import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
 import Data.Text (Text)
@@ -26,7 +27,7 @@ data ServiceProvider = ServiceProvider
                        , image :: Maybe Image
                        , offices :: [Object]
                        , providerships :: [Object]
-                       , externalLinks :: [Object]
+                       , externalLinks :: [ExternalLink]
                        } deriving (Eq, Show)
 
 instance FromJSON ServiceProvider where

@@ -7,6 +7,7 @@ import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.FinancialOrganizationQuery (FinancialOrganizationPermalink(..))
 import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.VideoEmbed
+import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
 import Data.Text (Text)
@@ -40,7 +41,7 @@ data FinancialOrganization = FinancialOrganization
                              , providerships :: [Object]
                              , funds :: [Object]
                              , videoEmbeds :: [VideoEmbed]
-                             , externalLinks :: [Object]
+                             , externalLinks :: [ExternalLink]
                              } deriving (Eq, Show)
 
 instance FromJSON FinancialOrganization where

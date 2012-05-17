@@ -7,6 +7,7 @@ import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.CompanyQuery (CompanyPermalink(..))
 import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.VideoEmbed
+import Data.API.CrunchBase.ExternalLink
 
 import Data.Aeson
 import Data.Text (Text)
@@ -51,7 +52,7 @@ data Company = Company { name :: Text
                        , ipo :: Maybe Object
                        , videoEmbeds :: [VideoEmbed]
                        , screenshots :: [Object]
-                       , externalLinks :: [Object]
+                       , externalLinks :: [ExternalLink]
                        } deriving (Eq, Show)
 
 instance FromJSON Company where
