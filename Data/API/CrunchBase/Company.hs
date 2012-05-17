@@ -6,6 +6,7 @@ module Data.API.CrunchBase.Company
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.CompanyQuery (CompanyPermalink(..))
 import Data.API.CrunchBase.Image
+import Data.API.CrunchBase.VideoEmbed
 
 import Data.Aeson
 import Data.Text (Text)
@@ -48,7 +49,7 @@ data Company = Company { name :: Text
                        , offices :: [Object]
                        , milestones :: [Object]
                        , ipo :: Maybe Object
-                       , videoEmbeds :: [Object]
+                       , videoEmbeds :: [VideoEmbed]
                        , screenshots :: [Object]
                        , externalLinks :: [Object]
                        } deriving (Eq, Show)

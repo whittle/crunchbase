@@ -6,6 +6,7 @@ module Data.API.CrunchBase.Product
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.ProductQuery (ProductPermalink (..))
 import Data.API.CrunchBase.Image
+import Data.API.CrunchBase.VideoEmbed
 
 import Data.Aeson
 import Data.Text (Text)
@@ -35,7 +36,7 @@ data Product = Product { name :: Text
                        , image :: Maybe Image
                        , company :: Maybe Object
                        , milestones :: [Object]
-                       , videoEmbeds :: [Object]
+                       , videoEmbeds :: [VideoEmbed]
                        , externalLinks :: [Object]
                        } deriving (Eq, Show)
 

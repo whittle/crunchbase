@@ -6,6 +6,7 @@ module Data.API.CrunchBase.FinancialOrganization
 import Data.API.CrunchBase.Response
 import Data.API.CrunchBase.FinancialOrganizationQuery (FinancialOrganizationPermalink(..))
 import Data.API.CrunchBase.Image
+import Data.API.CrunchBase.VideoEmbed
 
 import Data.Aeson
 import Data.Text (Text)
@@ -38,7 +39,7 @@ data FinancialOrganization = FinancialOrganization
                              , milestones :: [Object]
                              , providerships :: [Object]
                              , funds :: [Object]
-                             , videoEmbeds :: [Object]
+                             , videoEmbeds :: [VideoEmbed]
                              , externalLinks :: [Object]
                              } deriving (Eq, Show)
 
