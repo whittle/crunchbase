@@ -8,6 +8,7 @@ import Data.API.CrunchBase.CompanyQuery (CompanyPermalink(..))
 import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.VideoEmbed
 import Data.API.CrunchBase.ExternalLink
+import Data.Time.FuzzyDate
 
 import Data.Aeson
 import Data.Text (Text)
@@ -22,12 +23,8 @@ data Company = Company { name :: Text
                        , twitterUsername :: Maybe Text
                        , categoryCode :: Maybe Text
                        , numberOfEmployees :: Maybe Integer
-                       , foundedYear :: Maybe Integer
-                       , foundedMonth :: Maybe Integer
-                       , foundedDay :: Maybe Integer
-                       , deadpooledYear :: Maybe Integer
-                       , deadpooledMonth :: Maybe Integer
-                       , deadpooledDay :: Maybe Integer
+                       , foundedDate :: Maybe FuzzyDate
+                       , deadpooledDate :: Maybe FuzzyDate
                        , deadpooledUrl :: Maybe Text
                        , tagList :: Maybe Text
                        , aliasList :: Maybe Text
@@ -66,12 +63,8 @@ instance FromJSON Company where
                          <*> o .:- "twitter_username"
                          <*> o .:- "category_code"
                          <*> o .:? "number_of_employees"
-                         <*> o .:? "founded_year"
-                         <*> o .:? "founded_month"
-                         <*> o .:? "founded_day"
-                         <*> o .:? "deadpooled_year"
-                         <*> o .:? "deadpooled_month"
-                         <*> o .:? "deadpooled_day"
+                         <*> mkDate o "founded_year" "founded_month" "founded_day"
+                         <*> mkDate o "deadpooled_year" "deadpooled_month" "deadpooled_day"
                          <*> o .:- "deadpooled_url"
                          <*> o .:- "tag_list"
                          <*> o .:- "alias_list"

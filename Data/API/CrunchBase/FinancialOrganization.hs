@@ -8,6 +8,7 @@ import Data.API.CrunchBase.FinancialOrganizationQuery (FinancialOrganizationPerm
 import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.VideoEmbed
 import Data.API.CrunchBase.ExternalLink
+import Data.Time.FuzzyDate
 
 import Data.Aeson
 import Data.Text (Text)
@@ -25,9 +26,7 @@ data FinancialOrganization = FinancialOrganization
                              , description :: Maybe Text
                              , emailAddress :: Maybe Text
                              , numberOfEmployees :: Maybe Integer
-                             , foundedYear :: Maybe Integer
-                             , foundedMonth :: Maybe Integer
-                             , foundedDay :: Maybe Integer
+                             , foundedDate :: Maybe FuzzyDate
                              , tagList :: Maybe Text
                              , aliasList :: Maybe Text
                              , createdAt :: Maybe Text
@@ -57,9 +56,7 @@ instance FromJSON FinancialOrganization where
                          <*> o .:- "description"
                          <*> o .:- "email_address"
                          <*> o .:? "number_of_employees"
-                         <*> o .:? "founded_year"
-                         <*> o .:? "founded_month"
-                         <*> o .:? "founded_day"
+                         <*> mkDate o "founded_year" "founded_month" "founded_day"
                          <*> o .:- "tag_list"
                          <*> o .:- "alias_list"
                          <*> o .:- "created_at"

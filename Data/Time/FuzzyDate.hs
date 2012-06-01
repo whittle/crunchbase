@@ -4,7 +4,8 @@
 --  * both the month and year are known
 --  * the day, month and year are all known
 module Data.Time.FuzzyDate
-       ( fuzzyDateValid
+       ( FuzzyDate
+       , fuzzyDateValid
        , HowFuzzy(..)
        , howFuzzy
        ) where

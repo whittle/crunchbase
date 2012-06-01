@@ -14,6 +14,7 @@ import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.FundingRound
 import Data.API.CrunchBase.VideoEmbed
 import Data.API.CrunchBase.ExternalLink
+import Data.Time.FuzzyDate
 
 import Data.Aeson
 import Data.Aeson.Types (Parser)
@@ -30,9 +31,7 @@ data Person = Person { firstName :: Text
                      , blogUrl :: Maybe Text
                      , blogFeedUrl :: Maybe Text
                      , affiliationName :: Maybe Text
-                     , bornYear :: Maybe Integer
-                     , bornMonth :: Maybe Integer
-                     , bornDay :: Maybe Integer
+                     , bornDate :: Maybe FuzzyDate
                      , tagList :: Maybe Text
                      , aliasList :: Maybe Text
                      , createdAt :: Maybe Text
@@ -60,9 +59,7 @@ instance FromJSON Person where
                          <*> o .:- "blog_url"
                          <*> o .:- "blog_feed_url"
                          <*> o .:- "affiliation_name"
-                         <*> o .:? "born_year"
-                         <*> o .:? "born_month"
-                         <*> o .:? "born_day"
+                         <*> mkDate o "born_year" "born_month" "born_day"
                          <*> o .:- "tag_list"
                          <*> o .:- "alias_list"
                          <*> o .:- "created_at"
@@ -80,9 +77,7 @@ instance FromJSON Person where
 data Degree = Degree { degreeType :: Maybe Text
                      , subject :: Maybe Text
                      , institution :: Maybe Text
-                     , graduatedYear :: Maybe Integer
-                     , graduatedMonth :: Maybe Integer
-                     , graduatedDay :: Maybe Integer
+                     , graduatedDate :: Maybe FuzzyDate
                      } deriving (Eq, Show)
 
 instance FromJSON Degree where
@@ -90,9 +85,7 @@ instance FromJSON Degree where
                          <$> o .:- "degree_type"
                          <*> o .:- "subject"
                          <*> o .:- "institution"
-                         <*> o .:? "graduated_year"
-                         <*> o .:? "graduated_month"
-                         <*> o .:? "graduated_day"
+                         <*> mkDate o "graduated_year" "graduated_month" "graduated_day"
 
 data Relationship = Relationship { isPast :: Maybe Bool
                                  , title :: Maybe Text
@@ -119,9 +112,7 @@ instance FromJSON Investment where
   parseJSON (Object o) = Investment <$> o .: "funding_round"
 
 data Milestone = Milestone { description :: Text
-                           , stonedYear :: Maybe Integer
-                           , stonedMonth :: Maybe Integer
-                           , stonedDay :: Maybe Integer
+                           , stonedDate :: Maybe FuzzyDate
                            , sourceUrl :: Maybe Text
                            , sourceText :: Maybe Text
                            , sourceDescription :: Maybe Text
@@ -133,9 +124,7 @@ data Milestone = Milestone { description :: Text
 instance FromJSON Milestone where
   parseJSON (Object o) = Milestone
                          <$> o .: "description"
-                         <*> o .:? "stoned_year"
-                         <*> o .:? "stoned_month"
-                         <*> o .:? "stoned_day"
+                         <*> mkDate o "stoned_year" "stoned_month" "stoned_day"
                          <*> o .:- "source_url"
                          <*> o .:- "source_text"
                          <*> o .:- "source_description"

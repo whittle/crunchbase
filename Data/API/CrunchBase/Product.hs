@@ -8,6 +8,7 @@ import Data.API.CrunchBase.ProductQuery (ProductPermalink (..))
 import Data.API.CrunchBase.Image
 import Data.API.CrunchBase.VideoEmbed
 import Data.API.CrunchBase.ExternalLink
+import Data.Time.FuzzyDate
 
 import Data.Aeson
 import Data.Text (Text)
@@ -25,12 +26,8 @@ data Product = Product { name :: Text
                        , inviteShareUrl :: Maybe Text
                        , tagList :: Maybe Text
                        , aliasList :: Maybe Text
-                       , deadpooledYear :: Maybe Integer
-                       , deadpooledMonth :: Maybe Integer
-                       , deadpooledDay :: Maybe Integer
-                       , launchedYear :: Maybe Integer
-                       , launchedMonth :: Maybe Integer
-                       , launchedDay :: Maybe Integer
+                       , deadpooledDate :: Maybe FuzzyDate
+                       , launchedDate :: Maybe FuzzyDate
                        , createdAt :: Maybe Text
                        , updatedAt :: Maybe Text
                        , overview :: Maybe Text
@@ -55,12 +52,8 @@ instance FromJSON Product where
                          <*> o .:- "invite_share_url"
                          <*> o .:- "tag_list"
                          <*> o .:- "alias_list"
-                         <*> o .:? "deadpooled_year"
-                         <*> o .:? "deadpooled_month"
-                         <*> o .:? "deadpooled_day"
-                         <*> o .:? "launched_year"
-                         <*> o .:? "launched_month"
-                         <*> o .:? "launched_day"
+                         <*> mkDate o "deadpooled_year" "deadpooled_month" "deadpooled_day"
+                         <*> mkDate o "launched_year" "launched_month" "launched_day"
                          <*> o .:- "created_at"
                          <*> o .:- "updated_at"
                          <*> o .:- "overview"
