@@ -44,6 +44,8 @@ library
   other-modules:
     Data.API.CrunchBase.Query
     Data.API.CrunchBase.Response
+    Data.Time.FuzzyDate
+    Data.Time.FuzzyDate.Private
 
   build-depends: base ==4.5.*
                , ghc-prim
