@@ -1,20 +1,20 @@
-name:                crunchbase
-version:             0.1.3.0
-synopsis:            Access the CrunchBase API.
-homepage:            https://github.com/whittle/crunchbase
-license:             MIT
-license-file:        LICENSE.txt
-author:              Jason Whittle
-maintainer:          jason.whittle@gmail.com
-copyright:           Copyright (c) 2012 Jason A. Whittle
-category:            API, Network
-build-type:          Simple
-cabal-version:       >=1.8
-stability:           experimental
-tested-with:         GHC == 7.4.1
-bug-reports:         https://github.com/whittle/crunchbase/issues
+name:             crunchbase
+version:          0.1.3.0
+synopsis:         Access the CrunchBase API.
+homepage:         https://github.com/whittle/crunchbase
+license:          MIT
+license-file:     LICENSE.txt
+author:           Jason Whittle
+maintainer:       jason.whittle@gmail.com
+copyright:        Copyright (c) 2012 Jason A. Whittle
+category:         API, Network
+build-type:       Simple
+cabal-version:    >= 1.8
+stability:        experimental
+tested-with:      GHC == 7.4.1
+bug-reports:      https://github.com/whittle/crunchbase/issues
 description:
-  This is a driver for the CrunchBase API.
+  A driver for the CrunchBase API.
 
 extra-source-files:
   README.md
@@ -46,21 +46,21 @@ library
     Data.API.CrunchBase.Response
     Data.Time.FuzzyDate
 
-  build-depends: base ==4.5.*
+  build-depends: base                     == 4.5.*
                , ghc-prim
-               , aeson ==0.6.*
-               , attoparsec ==0.10.*
-               , blaze-builder ==0.3.1.*
-               , bytestring ==0.9.*
-               , containers ==0.4.2.*
-               , HTTP ==4000.*
-               , http-conduit ==1.4.1.*
-               , http-types ==0.6.*
-               , network ==2.3.*
-               , Ranged-sets ==0.3.*
-               , text ==0.11.1.*
-               , time ==1.4
-               , vector ==0.9.*
+               , aeson                    == 0.6.*
+               , attoparsec               == 0.10.*
+               , blaze-builder            == 0.3.1.*
+               , bytestring               == 0.9.*
+               , containers               == 0.4.2.*
+               , HTTP                     == 4000.*
+               , http-conduit             == 1.4.1.*
+               , http-types               == 0.6.*
+               , network                  == 2.3.*
+               , Ranged-sets              == 0.3.*
+               , text                     == 0.11.1.*
+               , time                     == 1.4
+               , vector                   == 0.9.*
 
 source-repository head
   type: git
