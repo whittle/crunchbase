@@ -1,3 +1,4 @@
-dist
 .vagrant
+cabal-dev
+dist
 Vagrantfile
