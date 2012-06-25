@@ -46,21 +46,21 @@ library
     Data.API.CrunchBase.Response
     Data.Time.FuzzyDate
 
-  build-depends: base                     == 4.5.*
-               , ghc-prim
-               , aeson                    == 0.6.*
-               , attoparsec               == 0.10.*
-               , blaze-builder            == 0.3.1.*
-               , bytestring               == 0.9.*
-               , containers               == 0.4.2.*
-               , HTTP                     == 4000.*
-               , http-conduit             == 1.4.1.*
-               , http-types               == 0.6.*
-               , network                  == 2.3.*
-               , Ranged-sets              == 0.3.*
-               , text                     == 0.11.1.*
-               , time                     == 1.4
-               , vector                   == 0.9.*
+  build-depends:  base                          == 4.5.*
+                , ghc-prim
+                , aeson                         == 0.6.*
+                , attoparsec                    == 0.10.*
+                , blaze-builder                 == 0.3.*
+                , bytestring                    == 0.9.*
+                , containers                    == 0.4.2.*
+                , HTTP                          == 4000.*
+                , http-conduit                  == 1.4.*
+                , http-types                    == 0.6.*
+                , network                       == 2.3.*
+                , Ranged-sets                   == 0.3.*
+                , text                          == 0.11.*
+                , time                          == 1.4
+                , vector                        == 0.9.*
 
 source-repository head
   type: git

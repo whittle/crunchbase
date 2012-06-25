@@ -1,4 +1,6 @@
 .vagrant
+Vagrantfile
 cabal-dev
 dist
-Vagrantfile
+dist_*
+sources.txt
