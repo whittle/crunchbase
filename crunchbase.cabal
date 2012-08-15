@@ -54,8 +54,8 @@ library
                 , bytestring                    == 0.9.*
                 , containers                    == 0.4.2.*
                 , HTTP                          == 4000.*
-                , http-conduit                  == 1.4.*
-                , http-types                    == 0.6.*
+                , http-conduit                  == 1.5.*
+                , http-types                    == 0.7.*
                 , network                       == 2.3.*
                 , Ranged-sets                   == 0.3.*
                 , text                          == 0.11.*
